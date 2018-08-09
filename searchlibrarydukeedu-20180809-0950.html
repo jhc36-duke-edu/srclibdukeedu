@@ -522,7 +522,7 @@ pre { font: inherit; word-wrap: break-word; background: none; border: none; }
 
 <p>To use Duke&#39;s resources efficiently and accomplish the goal of retrofitting some accessibility fixes in a timely manner, this review is limited to issues that will make it possible for a screen reader user to use the advanced search. It does not make it super easy to use, but it does make it possible to use. It does not cover issues like color contrast which would not benefit a screen reader only user.</p>
 
-<p>This assessment is on a website that was made many years ago, its is not fair to compare it to an accessibility standard that did not exist when it was created. Assessments are in no way a commentary on how a websites was created or its code. It is simply a collection of recipes to improve its functionality and compliance with current standards.</p>
+<p>This assessment is on a website that was made many years ago, its is not fair to compare it to an accessibility standard that did not exist when it was created. Assessments are in no way a commentary on how a website was created or its code. It is simply a collection of improvements and recipes to improve its functionality and compliance with current standards.</p>
 
 <p>This report was put together with haste in one day. These normally take 20 or 30 hours.  Please excuse any spelling or grammar errors ;-) </p>
 
@@ -597,7 +597,11 @@ Your browser does not support the audio element.
 
 <h3 id="toc_6">Add headings to add structure to the facet column</h3>
 
-<p>Screen readers can navigate using headers. ARIA to the rescue again. By using ARIA <code>role=&quot;heading&quot;</code> we can add this information without the need for CSS.</p>
+<p>Screen readers can navigate using headers. ARIA to the rescue again. By using ARIA <code>role=&quot;heading&quot;</code> and <code>aria-level=&quot;&quot;</code> we can add this information without the need for CSS.</p>
+
+<h4 id="toc_7">Suggested solution:</h4>
+
+<p>Paste in two sets of ARIA attributes.</p>
 
 <div><pre><code class="language-markup">&lt;div id=&quot;facets&quot;&gt;
     &lt;table width=&quot;100%&quot; class=&quot;noBorder&quot; id=&quot;currentSearch&quot;&gt;
@@ -633,19 +637,19 @@ Your browser does not support the audio element.
 
 <p><br></p>
 
-<h2 id="toc_7">ARIA landmark elements need added to enable screen reader to navigate the webpage</h2>
+<h2 id="toc_8">ARIA landmark elements need added to enable screen reader to skip to specific areas of the webpage</h2>
 
 <p>Landmark elements are used to improve the keyboard navigation of the page for assistive technology. <a href="https://developers.google.com/web/fundamentals/accessibility/how-to-review#take_advantage_of_headings_and_landmarks">Learn more</a>.</p>
 
-<h3 id="toc_8">Tables are being used for layout instead of tabular data</h3>
+<h3 id="toc_9">Tables are being used for layout instead of tabular data</h3>
 
 <p>While tables are primarily intended for the presentation of tabular information or data. In the past they were commonly used to control page layout and formatting. Layout tables can introduce difficulties to screen readers.</p>
 
 <p>It would be too invasive to rewrite the visual layout of the page to use <code>&lt;div&gt;</code>s. Multiple nested tables makes navigating the webpage difficult at best. But, it is not practical to fix on our timeline. </p>
 
-<p>We can mitigate the issue by retrofitting ARIA Landmarks to assist screen readers in navigating the page efficiently. This is relatively non-invasive with a big positive impact.</p>
+<p>We can mitigate the issue by retrofitting ARIA Landmarks to assist screen readers in navigating the page efficiently. This is relatively non-invasive cut-paste type win with a big positive impact.</p>
 
-<h4 id="toc_9">Suggested solution:</h4>
+<h4 id="toc_10">Suggested solution:</h4>
 
 <p>ARIA attributes to the rescue!</p>
 
@@ -696,11 +700,11 @@ Your browser does not support the audio element.
 
 <p><br></p>
 
-<h2 id="toc_10">Some form elements do not have associated labels</h2>
+<h2 id="toc_11">Some form elements do not have associated labels</h2>
 
 <p>Labels ensure that form controls are announced properly by assistive technologies, like screen readers. <a href="https://dequeuniversity.com/rules/axe/2.2/label?application=lighthouse">Learn more</a>.</p>
 
-<h3 id="toc_11">The search input element is not associated with a label</h3>
+<h3 id="toc_12">The search input element is not associated with a label</h3>
 
 <p><strong>Visual location:</strong></p>
 
@@ -713,9 +717,11 @@ Your browser does not support the audio element.
   &lt;input type=&quot;text&quot; size=&quot;40&quot; name=&quot;query&quot; id=&quot;Ntt&quot; class=&quot;catalogSearchFormElement ac_input&quot; value=&quot;cats&quot; autocomplete=&quot;off&quot;&gt;
 &lt;/td&gt;</code></pre></div>
 
-<h4 id="toc_12">Suggested solution:</h4>
+<h4 id="toc_13">Suggested solution:</h4>
 
-<p>The <code>&lt;label&gt;</code> already exists but does not associate itself to the input. Modern browsers associate the <code>for</code> attribute to the <code>id</code>, not the <code>name</code>. To fix just change the label from <code>for=&quot;query&quot;</code> to <code>for=&quot;Ntt&quot;</code>. </p>
+<p>The <code>&lt;label&gt;</code> already exists but does not associate itself to the input. Modern browsers associate the <code>for</code> attribute to the <code>id</code>, not the <code>name</code>. </p>
+
+<p>To fix just change the label&#39;s <code>for</code> attribute value from <code>for=&quot;query&quot;</code> to <code>for=&quot;Ntt&quot;</code>. </p>
 
 <p><details>
 <summary><em>Additional debugging details</em></summary>
@@ -740,7 +746,7 @@ Fix any of the following:
 
 <p><br></p>
 
-<h3 id="toc_13">The select type element is not associated with a label</h3>
+<h3 id="toc_14">The select type element is not associated with a label</h3>
 
 <p><strong>Visual location:</strong></p>
 
@@ -759,9 +765,11 @@ Fix any of the following:
   &lt;input type=&quot;submit&quot; id=&quot;querySubmit&quot; class=&quot;catalogSearchBarFormElement&quot; value=&quot;Search&quot;&gt;
 &lt;/td&gt;</code></pre></div>
 
-<h4 id="toc_14">Suggested solution:</h4>
+<h4 id="toc_15">Suggested solution:</h4>
 
-<p>The <code>&lt;label&gt;</code> already exists but does not associate itself to the input. Modern browsers associate the <code>for</code> attribute to the <code>id</code>, not the <code>name</code>.  To fix just change the label from <code>for=&quot;searchType&quot;</code> to <code>for=&quot;Ntk&quot;</code>.  </p>
+<p>The <code>&lt;label&gt;</code> already exists but does not associate itself to the input. Modern browsers associate the <code>for</code> attribute to the <code>id</code>, not the <code>name</code>.  </p>
+
+<p>To fix just change the label&#39;s <code>for</code> attribute value from <code>for=&quot;searchType&quot;</code> to <code>for=&quot;Ntk&quot;</code>.  </p>
 
 <p><details>
 <summary><em>Additional debugging details</em></summary>
@@ -786,13 +794,13 @@ Fix any of the following:
 
 <p><br></p>
 
-<h2 id="toc_15">Some image elements do not have <code>[alt]</code> attributes</h2>
+<h2 id="toc_16">Some image elements do not have <code>[alt]</code> attributes</h2>
 
 <p>Informative elements should aim for short, descriptive alternate text. Decorative elements can be ignored with an empty alt attribute. <a href="https://dequeuniversity.com/rules/axe/2.2/image-alt?application=lighthouse">Learn more</a>.</p>
 
-<h3 id="toc_16">Refine search expanding arrows (multiple)</h3>
+<h3 id="toc_17">Refine search expanding arrows (multiple)</h3>
 
-<p>Currently a screen reader would read the name of the image since there is not alt tag &quot;DUKE_rightarrow.gif&quot;.  Fixing the missing <code>alt</code> is a big win. It will make the image more descriptive.</p>
+<p>Currently a screen reader would read the name of the image a couple dozen times since there is not alt tag &quot;DUKE_rightarrow.gif&quot;.  Fixing the missing <code>alt</code> is a big win. It will make the image more descriptive.</p>
 
 <p><strong>Example:</strong></p>
 
@@ -811,7 +819,7 @@ Fix any of the following:
   &lt;strong&gt;Subject&lt;/strong&gt;
 &lt;/a&gt;</code></pre></div>
 
-<h4 id="toc_17">Suggested solution:</h4>
+<h4 id="toc_18">Suggested solution:</h4>
 
 <p>Add an <code>alt</code> attribute with an accurate description to the image or add invisible screen reader text.</p>
 
@@ -823,6 +831,8 @@ Fix any of the following:
 &lt;/a&gt;</code></pre></div>
 
 <p><strong><a href="img%20src=%22images/DUKE_rightarrow.gif%22">Please view Gist</a></strong></p>
+
+<p>NOTE: when it is not expanded it should say alt=&quot;<strong>Collapsed facet</strong>&quot;.</p>
 
 <p><details>
 <summary><em>Additional debugging details</em></summary>
@@ -845,7 +855,7 @@ Fix any of the following:
 
 <p><br></p>
 
-<h3 id="toc_18">Internet resource icons, Online Video icons, DVD, and Book icons need <code>alt=&quot;&quot;</code> (multiple)</h3>
+<h3 id="toc_19">Internet resource icons, Online Video icons, DVD, and Book icons need <code>alt=&quot;&quot;</code> (multiple)</h3>
 
 <p>If a screen reader was reading through the section it would read &quot;Image icon-Internet resource.gif Internet resource&quot;.  Missing an alt attribute is a WCAG error. In this case, describing the image does not add information so it does not need described.</p>
 
@@ -876,7 +886,7 @@ Fix any of the following:
   &lt;img class=&quot;fmtIcon&quot; src=&quot;images/icon-Online Video.gif&quot;&gt; Online Video
 &lt;/td&gt;</code></pre></div>
 
-<h4 id="toc_19">Suggested solution:</h4>
+<h4 id="toc_20">Suggested solution:</h4>
 
 <p>Add an alt attribute that has no value <code>alt=&quot;&quot;</code> will tell the screen reader to skip the image, which is what we want here.  WCAG advises that images that are immediately labeled  do not need redundant alt text because it is unnecessary information and annoys screen reader users.</p>
 
@@ -908,7 +918,7 @@ Fix any of the following:
 
 <p><br></p>
 
-<h3 id="toc_20">Book cover icons need <code>alt=&quot;&quot;</code> (multiple)</h3>
+<h3 id="toc_21">Book cover icons need <code>alt=&quot;&quot;</code> (multiple)</h3>
 
 <p>Adding descriptive text about the cover of the book might be helpful, but this data does not exist at the moment. It is not practical to add it.  We need to just add <code>alt=&quot;&quot;</code>. If the search is redesigned, please consider making <code>alt</code> a required field in the new system.</p>
 
@@ -926,7 +936,7 @@ Fix any of the following:
 
 <div><pre><code class="language-markup">&lt;img class=&quot;bookCover&quot; src=&quot;//syndetics.com/index.php?isbn=9781603094221/SC.GIF&amp;amp;oclc=992310427&amp;amp;client=trlnet&quot;&gt;</code></pre></div>
 
-<h4 id="toc_21">Suggested solution:</h4>
+<h4 id="toc_22">Suggested solution:</h4>
 
 <p>Add an <code>alt</code> attribute with an accurate description to the image or add invisible screen reader text.</p>
 
@@ -952,7 +962,7 @@ Fix any of the following:
 
 <p><br></p>
 
-<h3 id="toc_22">Invisible images for Clearing and spacing have no alt text</h3>
+<h3 id="toc_23">Invisible images for Clearing and spacing have no alt text</h3>
 
 <p>Some clear invisible images are used for spacing. They need <code>alt=&quot;&quot;</code> so they don&#39;t get announced to the screen reader</p>
 
@@ -966,7 +976,7 @@ Fix any of the following:
 
 <div><pre><code class="language-markup">&lt;img src=&quot;/images/clear.gif&quot; border=&quot;0&quot; width=&quot;94px&quot; height=&quot;0px&quot;&gt;</code></pre></div>
 
-<h4 id="toc_23">Suggested solution:</h4>
+<h4 id="toc_24">Suggested solution:</h4>
 
 <p>Add an <code>alt=&quot;&quot;</code> attribute as mentioned above.</p>
 
@@ -991,11 +1001,11 @@ Fix any of the following:
 
 <p><br></p>
 
-<h2 id="toc_24">Some links do not have a discernible name</h2>
+<h2 id="toc_25">Some links do not have a discernible name</h2>
 
 <p>Link text (and alternate text for images, when used as links) that is discernible, unique, and focusable improves the navigation experience for screen reader users. <a href="https://dequeuniversity.com/rules/axe/2.2/link-name?application=lighthouse">Learn more</a>.</p>
 
-<h3 id="toc_25">The <code>&lt;a&gt;</code> links that contain the book cover thumbnails have no text and it&#39;s image has no <code>alt</code> attribute (multiple).</h3>
+<h3 id="toc_26">The <code>&lt;a&gt;</code> links that contain the book cover thumbnails have no text and it&#39;s image has no <code>alt</code> attribute (multiple).</h3>
 
 <p>Empty links with no text and an image with no alt text will read <em>&quot;Link Image&quot;</em> to most screen reader users. As a result, they will not know what the link does or what is in the image.</p>
 
@@ -1015,7 +1025,7 @@ Fix any of the following:
   &lt;/a&gt;
 &lt;/td&gt;</code></pre></div>
 
-<h4 id="toc_26">Suggested solution:</h4>
+<h4 id="toc_27">Suggested solution:</h4>
 
 <p>On a new website the following suggestion would probably be discouraged, but it is the right thing to do for remediating this website in a timely manner.</p>
 
@@ -1053,9 +1063,9 @@ Fix all of the following:
 
 <p><br></p>
 
-<h1 id="toc_27">Additional Manual testing</h1>
+<h1 id="toc_28">Additional Manual testing</h1>
 
-<h2 id="toc_28">User focus is not accidentally trapped in a region</h2>
+<h2 id="toc_29">User focus is not accidentally trapped in a region</h2>
 
 <p>Manual Test: User focus is not accidentally trapped in a region</p>
 
@@ -1070,7 +1080,7 @@ A user can tab into and out of any control or region without accidentally trappi
 
 <p><br></p>
 
-<h2 id="toc_29">Interactive controls are keyboard focusable</h2>
+<h2 id="toc_30">Interactive controls are keyboard focusable</h2>
 
 <p>Manual Test: Interactive controls are keyboard focusable</p>
 
@@ -1085,7 +1095,7 @@ Custom interactive controls are keyboard focusable and display a focus indicator
 
 <p><br></p>
 
-<h2 id="toc_30">The page has a logical tab order</h2>
+<h2 id="toc_31">The page has a logical tab order</h2>
 
 <p>Manual Test: The page has a logical tab order</p>
 
@@ -1100,7 +1110,7 @@ Tabbing through the page follows the visual layout. Users cannot focus elements 
 
 <p><br></p>
 
-<h2 id="toc_31">Visual order on the page follows DOM order</h2>
+<h2 id="toc_32">Visual order on the page follows DOM order</h2>
 
 <p>Manual Test: Visual order on the page follows DOM order</p>
 
@@ -1117,7 +1127,7 @@ DOM order matches the visual order, improving navigation for assistive technolog
 
 <p><br></p>
 
-<h2 id="toc_32">Offscreen content is hidden from assistive technology</h2>
+<h2 id="toc_33">Offscreen content is hidden from assistive technology</h2>
 
 <p>Manual Test: Offscreen content is hidden from assistive technology</p>
 

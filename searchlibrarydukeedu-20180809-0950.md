@@ -22,7 +22,7 @@ __Screenshot:__
 
 To use Duke's resources efficiently and accomplish the goal of retrofitting some accessibility fixes in a timely manner, this review is limited to issues that will make it possible for a screen reader user to use the advanced search. It does not make it super easy to use, but it does make it possible to use. It does not cover issues like color contrast which would not benefit a screen reader only user.
 
-This assessment is on a website that was made many years ago, its is not fair to compare it to an accessibility standard that did not exist when it was created. Assessments are in no way a commentary on how a websites was created or its code. It is simply a collection of recipes to improve its functionality and compliance with current standards.
+This assessment is on a website that was made many years ago, its is not fair to compare it to an accessibility standard that did not exist when it was created. Assessments are in no way a commentary on how a website was created or its code. It is simply a collection of improvements and recipes to improve its functionality and compliance with current standards.
 
 This report was put together with haste in one day. These normally take 20 or 30 hours.  Please excuse any spelling or grammar errors ;-) 
 
@@ -104,7 +104,13 @@ CSS class necessary to hide from sighted users:
 
 ### Add headings to add structure to the facet column
 
-Screen readers can navigate using headers. ARIA to the rescue again. By using ARIA `role="heading"` we can add this information without the need for CSS.
+Screen readers can navigate using headers. ARIA to the rescue again. By using ARIA `role="heading"` and `aria-level=""` we can add this information without the need for CSS.
+
+
+
+#### Suggested solution:
+
+Paste in two sets of ARIA attributes.
 
 ```html
 <div id="facets">
@@ -142,7 +148,7 @@ Ideally, the items nested below the H2's like "Subject", "Medical Subject", "For
 
 <br>
 
-## ARIA landmark elements need added to enable screen reader to navigate the webpage
+## ARIA landmark elements need added to enable screen reader to skip to specific areas of the webpage
 
 Landmark elements are used to improve the keyboard navigation of the page for assistive technology. [Learn more](https://developers.google.com/web/fundamentals/accessibility/how-to-review#take_advantage_of_headings_and_landmarks).
 
@@ -153,7 +159,7 @@ While tables are primarily intended for the presentation of tabular information 
 
 It would be too invasive to rewrite the visual layout of the page to use `<div>`s. Multiple nested tables makes navigating the webpage difficult at best. But, it is not practical to fix on our timeline. 
 
-We can mitigate the issue by retrofitting ARIA Landmarks to assist screen readers in navigating the page efficiently. This is relatively non-invasive with a big positive impact.
+We can mitigate the issue by retrofitting ARIA Landmarks to assist screen readers in navigating the page efficiently. This is relatively non-invasive cut-paste type win with a big positive impact.
 
 #### Suggested solution:
 
@@ -233,7 +239,9 @@ __HTML location:__
 
 #### Suggested solution:
 
-The `<label>` already exists but does not associate itself to the input. Modern browsers associate the `for` attribute to the `id`, not the `name`. To fix just change the label from `for="query"` to `for="Ntt"`. 
+The `<label>` already exists but does not associate itself to the input. Modern browsers associate the `for` attribute to the `id`, not the `name`. 
+
+To fix just change the label's `for` attribute value from `for="query"` to `for="Ntt"`. 
 
 <details>
 <summary>_Additional debugging details_</summary>
@@ -282,7 +290,9 @@ __HTML location:__
 
 #### Suggested solution:
 
-The `<label>` already exists but does not associate itself to the input. Modern browsers associate the `for` attribute to the `id`, not the `name`.  To fix just change the label from `for="searchType"` to `for="Ntk"`.  
+The `<label>` already exists but does not associate itself to the input. Modern browsers associate the `for` attribute to the `id`, not the `name`.  
+
+To fix just change the label's `for` attribute value from `for="searchType"` to `for="Ntk"`.  
 
 <details>
 <summary>_Additional debugging details_</summary>
@@ -315,7 +325,7 @@ Informative elements should aim for short, descriptive alternate text. Decorativ
 
 ### Refine search expanding arrows (multiple)
 
-Currently a screen reader would read the name of the image since there is not alt tag "DUKE_rightarrow.gif".  Fixing the missing `alt` is a big win. It will make the image more descriptive.
+Currently a screen reader would read the name of the image a couple dozen times since there is not alt tag "DUKE_rightarrow.gif".  Fixing the missing `alt` is a big win. It will make the image more descriptive.
 
 
 __Example:__
@@ -356,6 +366,8 @@ Since both the image and the facet text are in the same link `<a>`, adding `alt=
 
 
 __[Please view Gist](<img src="images/DUKE_rightarrow.gif">)__
+
+NOTE: when it is not expanded it should say alt="__Collapsed facet__".
 
 <details>
 <summary>_Additional debugging details_</summary>
